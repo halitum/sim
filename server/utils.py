@@ -3,7 +3,7 @@ import json_repair
 
 from langchain_openai import ChatOpenAI
 from typing import Any
-from configs.model import llm_model
+from configs.model_config import llm_model
 
 def extract_pure_json(info: str):
     """gpt返回的字符串可能不带前缀，也可能带前缀"""

@@ -1,8 +1,6 @@
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from mem0 import MemoryClient
-from utils import get_ChatOpenAI, extract_pure_json
-from configs import llm_model, embed_model, mem0_ai_api
+from server.utils import get_ChatOpenAI, extract_pure_json
 
 
 class BaseAgent:

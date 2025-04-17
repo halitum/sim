@@ -1,0 +1,1 @@
+nohup python startup.py --all-api 2>&1 &

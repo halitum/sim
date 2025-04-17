@@ -7,7 +7,7 @@ stimulus_inducer = {
 
 # 决定终止的超参
 MIN_SCORE_THRESHOLD = 50
-MAX_ITERATIONS = 5
+MAX_ITERATIONS = 1
 
 context = {
     "us": {

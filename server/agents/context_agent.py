@@ -1,7 +1,7 @@
-from typing import Dict, Any, List
+from typing import Dict, List
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from utils import get_ChatOpenAI, extract_pure_json
+from server.utils import get_ChatOpenAI, extract_pure_json
 
 
 class ContextAgent:

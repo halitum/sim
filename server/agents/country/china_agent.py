@@ -1,6 +1,6 @@
 from mem0 import MemoryClient
 
-from agents.base import BaseAgent
+from server.agents.base import BaseAgent
 from configs import mem0_ai_api, DEBUG
 
 if DEBUG:

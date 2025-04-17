@@ -2,3 +2,6 @@ langchain-openai==0.3.13
 langchain==0.3.23
 chromadb==1.0.4
 json_repair==0.41.1
+fastapi == 0.115.9
+uvicorn == 0.34.0
+mem0ai == 0.1.91
