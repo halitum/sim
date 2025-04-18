@@ -59,10 +59,10 @@ class ChinaAgent(BaseAgent):
 </返回内容>
 """
         super().__init__(self.name, model_name, system_prompt)
-        self.client = MemoryClient(api_key=mem0_ai_api)
-
-    def _retrieve_context(self, query: str) -> str:
-        memories = self.client.search(query, user_id=self.name)
-        if memories:
-            return '\n'.join([mem["memory"] for mem in memories['results']])
-        return ''
+    #     self.client = MemoryClient(api_key=mem0_ai_api)
+    #
+    # def _retrieve_context(self, query: str) -> str:
+    #     memories = self.client.search(query, user_id=self.name)
+    #     if memories:
+    #         return '\n'.join([mem["memory"] for mem in memories['results']])
+    #     return ''

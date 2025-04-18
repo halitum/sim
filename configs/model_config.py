@@ -1,4 +1,4 @@
-mem0_ai_api = "sk-00000"
+mem0_ai_api = ""
 
 llm_model = {
     "deepseek-v3": {
