@@ -4,7 +4,7 @@ ssh-add ~/.ssh/id_rsa_zy
 git stash
 sleep 1
 
-git pull origin main
+git pull origin master
 sleep 3
 
 PORT=6010
