@@ -1,3 +1,6 @@
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa_zy
+
 git stash
 sleep 1
 
