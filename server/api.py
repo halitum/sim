@@ -1,6 +1,6 @@
 import uvicorn
 
-from server.start import start
+from server.start import start, fake_start
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,7 +19,7 @@ def create_app():
     )
 
     # Tag: User
-    app.get("/start")(start)
+    app.get("/start")(fake_start)
 
     return app
 
