@@ -15,8 +15,8 @@ context_agent = ContextAgent(initial_context=context, model_name="deepseek-v3")
 agents = {
     "us": USAgent("deepseek-v3"),
     "china": ChinaAgent("deepseek-v3"),
-    "canada": CanadaAgent("deepseek-v3"),
-    "vietnam": VietnamAgent("deepseek-v3")
+    # "canada": CanadaAgent("deepseek-v3"),
+    # "vietnam": VietnamAgent("deepseek-v3")
 }
 
 agent_memories = defaultdict(list)
@@ -265,16 +265,24 @@ async def start() -> StreamingResponse:
 async def fake_start():
     async def iterator():
         data_list = [
-            {"type": "stimulus", "data": {"source": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的“对等关税”"}, "iteration": 0},
-            {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的“对等关税”"}, "iteration": 0},
-            {"type": "agent_responses", "data": {"responses": [{"agent": "china", "score": "85", "action": "实施报复性关税", "action_detail": "针对美国对中国高科技产品加征20%关税的行为，中国将对来自美国的农产品（如大豆、猪肉）和能源产品（如液化天然气）加征25%的关税。同时，考虑限制稀土等关键原材料对美国的出口，以保护国家安全和产业链稳定。"}, {"agent": "canada", "score": "75", "action": "发起/响应谈判", "action_detail": "鉴于美国对所有贸易伙伴加征10%的关税，加拿大应主动提议与美国进行双边贸易谈判。谈判重点应包括：1) 讨论加拿大特定行业的豁免清单，特别是能源和农产品；2) 确保USMCA框架下的贸易便利化措施不受影响；3) 探讨在清洁能源和关键矿产领域的合作机会。同时，加拿大应与中国保持沟通，寻求在农产品出口方面的潜在合作机会，以多元化贸易伙伴。"}, {"agent": "vietnam", "score": "30", "action": "观望", "action_detail": "越南将保持中立观望态度，暂不采取任何报复性关税措施。我们将密切关注中美贸易摩擦的发展，评估其对越南出口和外资企业的影响。同时，越南将继续加强与东盟成员国的合作，推动区域经济一体化，以降低对单一市场的依赖。"}]}, "iteration": 0},
-            {"type": "agent_announce", "data": {"score": 85, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国对中国高科技产品加征20%关税的行为，中国将对来自美国的农产品（如大豆、猪肉）和能源产品（如液化天然气）加征25%的关税。同时，考虑限制稀土等关键原材料对美国的出口，以保护国家安全和产业链稳定。"}]}, "iteration": 0},
-            {"type": "economic_data", "data": {"us": {"GDP": 20.0, "失业率": 5.8, "通胀率": 3.5}, "china": {"GDP": 17.8, "失业率": 5.8, "通胀率": 2.4}, "canada": {"GDP": 2.1, "失业率": 5.5, "通胀率": 4.2}, "vietnam": {"GDP": 0.4, "失业率": 2.3, "通胀率": 3.8}}, "iteration": 0},
-            {"type": "iteration_start", "data": {"iteration_text": "迭代 1", "initiator": "china", "content": "针对美国对中国高科技产品加征20%关税的行为，中国将对来自美国的农产品（如大豆、猪肉）和能源产品（如液化天然气）加征25%的关税。同时，考虑限制稀土等关键原材料对美国的出口，以保护国家安全和产业链稳定。"}, "iteration": 1},
-            {"type": "agent_responses", "data": {"responses": [{"agent": "us", "score": "75", "action": "发起/响应谈判", "action_detail": "鉴于中国对美国农产品和能源产品加征25%关税的报复性措施，美国应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分高科技产品关税的可能性；2) 探讨稀土等关键原材料的供应链稳定性；3) 寻求在农产品和能源贸易上的平衡点。同时，美国应强调保持半导体等关键技术领先地位的重要性，并考虑在谈判中提出部分农产品关税的让步以换取中国在稀土出口上的保证。"}, {"agent": "canada", "score": 70, "action": "寻求对冲性合作 (新贸易协定)", "action_detail": "鉴于中美贸易紧张局势升级，加拿大应积极寻求与亚太地区其他国家（如越南）建立新的贸易协定，以多元化贸易伙伴，减少对单一市场的依赖。同时，加拿大应继续维护USMCA框架，确保与美国的贸易关系稳定。此外，加拿大可以提议与中国进行双边贸易谈判，讨论降低或取消相互加征的关税，特别是在农产品和高科技产品领域。"}, {"agent": "vietnam", "score": "30", "action": "观望", "action_detail": "越南政府将保持中立立场，不直接参与中美贸易争端。我们将密切关注事态发展，评估对越南出口和外资的影响，同时加强与东盟成员国的协调，确保区域供应链稳定。"}]}, "iteration": 1},
-            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "发起/响应谈判", "action_detail": "鉴于中国对美国农产品和能源产品加征25%关税的报复性措施，美国应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分高科技产品关税的可能性；2) 探讨稀土等关键原材料的供应链稳定性；3) 寻求在农产品和能源贸易上的平衡点。同时，美国应强调保持半导体等关键技术领先地位的重要性，并考虑在谈判中提出部分农产品关税的让步以换取中国在稀土出口上的保证。"}]}, "iteration": 1},
-            {"type": "economic_data", "data": {"us": {"GDP": 20.0, "失业率": 5.8, "通胀率": 3.6}, "china": {"GDP": 17.8, "失业率": 5.8, "通胀率": 2.4}, "canada": {"GDP": 2.1, "失业率": 5.5, "通胀率": 4.2}, "vietnam": {"GDP": 0.4, "失业率": 2.3, "通胀率": 3.8}}, "iteration": 1},
-            {"type": "iteration_end", "data": {"total_iterations": 1, "termination_reason": "达到最大迭代次数"}, "iteration": 1}
+            {"type": "stimulus", "data": {"source": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
+            {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
+            {"type": "agent_responses", "data": {"responses": [{"agent": "china", "score": "85", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
+            {"type": "agent_announce", "data": {"score": 85, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
+            {"type": "economic_data", "data": {"us": {"GDP": 20.7, "失业率": 5.7, "通胀率": 3.5}, "china": {"GDP": 17.9, "失业率": 5.5, "通胀率": 2.1}}, "iteration": 0},
+            {"type": "iteration_start", "data": {"iteration_text": "迭代 1", "initiator": "china", "content": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}, "iteration": 1},
+            {"type": "agent_responses", "data": {"responses": [{"agent": "us", "score": "75", "action": "实施报复性关税", "action_detail": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}]}, "iteration": 1},
+            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "实施报复性关税", "action_detail": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}]}, "iteration": 1},
+            {"type": "economic_data", "data": {"us": {"GDP": 20.6, "失业率": 5.9, "通胀率": 3.5}, "china": {"GDP": 17.7, "失业率": 5.5, "通胀率": 2.1}}, "iteration": 1},
+            {"type": "iteration_start", "data": {"iteration_text": "迭代 2", "initiator": "us", "content": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}, "iteration": 2},
+            {"type": "agent_responses", "data": {"responses": [{"agent": "china", "score": "75", "action": "实施报复性关税", "action_detail": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}]}, "iteration": 2},
+            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}]}, "iteration": 2},
+            {"type": "economic_data", "data": {"us": {"GDP": 20.3, "失业率": 6.2, "通胀率": 3.5}, "china": {"GDP": 17.6, "失业率": 5.8, "通胀率": 2.1}}, "iteration": 2},
+            {"type": "iteration_start", "data": {"iteration_text": "迭代 3", "initiator": "china", "content": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}, "iteration": 3},
+            {"type": "agent_responses", "data": {"responses": [{"agent": "us", "score": "75", "action": "发起/响应谈判", "action_detail": "鉴于中国的报复性关税措施对美国农业和关键原材料供应链的影响，美国政府应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分加征关税的可能性，特别是针对农产品和高科技产品；2) 探讨建立更稳定的稀土供应链机制；3) 寻求在技术出口管制方面的相互谅解。此举旨在缓解当前贸易紧张局势，同时保护美国的核心经济利益和技术优势。"}]}, "iteration": 3},
+            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "发起/响应谈判", "action_detail": "鉴于中国的报复性关税措施对美国农业和关键原材料供应链的影响，美国政府应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分加征关税的可能性，特别是针对农产品和高科技产品；2) 探讨建立更稳定的稀土供应链机制；3) 寻求在技术出口管制方面的相互谅解。此举旨在缓解当前贸易紧张局势，同时保护美国的核心经济利益和技术优势。"}]}, "iteration": 3},
+            {"type": "economic_data", "data": {"us": {"GDP": 20.3, "失业率": 6.2, "通胀率": 3.5}, "china": {"GDP": 17.6, "失业率": 5.8, "通胀率": 2.1}}, "iteration": 3},
+            {"type": "iteration_end", "data": {"total_iterations": 3, "termination_reason": "达到最大迭代次数"}, "iteration": 3}
         ]
 
         for data in data_list:

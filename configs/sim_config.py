@@ -7,7 +7,7 @@ stimulus_inducer = {
 
 # 决定终止的超参
 MIN_SCORE_THRESHOLD = 50
-MAX_ITERATIONS = 1
+MAX_ITERATIONS = 3
 
 context = {
     "us": {
@@ -20,14 +20,14 @@ context = {
         "失业率": 5.2,
         "通胀率": 2.1
     },
-    "canada": {
-        "GDP": 2.1,
-        "失业率": 5.5,
-        "通胀率": 4.2
-    },
-    "vietnam": {
-        "GDP": 0.4,
-        "失业率": 2.3,
-        "通胀率": 3.8
-    }
+    # "canada": {
+    #     "GDP": 2.1,
+    #     "失业率": 5.5,
+    #     "通胀率": 4.2
+    # },
+    # "vietnam": {
+    #     "GDP": 0.4,
+    #     "失业率": 2.3,
+    #     "通胀率": 3.8
+    # }
 }

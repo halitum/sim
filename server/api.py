@@ -18,7 +18,8 @@ def create_app():
         allow_headers=["*"],
     )
 
-    # Tag: User
+    # app.get("/start")(start)
+
     app.get("/start")(fake_start)
 
     return app
