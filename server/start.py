@@ -265,23 +265,150 @@ async def start() -> StreamingResponse:
 async def fake_start():
     async def iterator():
         data_list = [
-            {"type": "stimulus", "data": {"source": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
             {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
-            {"type": "agent_responses", "data": {"responses": [{"agent": "china", "score": "85", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
             {"type": "agent_announce", "data": {"score": 85, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
-            {"type": "economic_data", "data": {"us": {"GDP": 20.7, "失业率": 5.7, "通胀率": 3.5}, "china": {"GDP": 17.9, "失业率": 5.5, "通胀率": 2.1}}, "iteration": 0},
+            {
+                "type": "economic_data",
+                "data": {
+                "china": {
+                    "import_value_billion_usd": 75,
+                    "import_change_pct": -7.58,
+                    "export_value_billion_usd": 370,
+                    "export_change_pct": -11.51,
+                    "market_share_pct": 31.5,
+                    "market_share_change_pct": -5.48,
+                    "annual_production_ten_thousand_vehicles": 900,
+                    "annual_production_change_pct": -3.23,
+                    "demand_ten_thousand_vehicles": 770,
+                    "demand_change_pct": -4.94,
+                    "production_cost_ten_thousand_usd": 2.3,
+                    "production_cost_change_pct": -4.17
+                },
+                "us": {
+                    "import_value_billion_usd": 120,
+                    "import_change_pct": -11.11,
+                    "export_value_billion_usd": 65,
+                    "export_change_pct": 8.33,
+                    "market_share_pct": 10.5,
+                    "market_share_change_pct": 12.90,
+                    "annual_production_ten_thousand_vehicles": 215,
+                    "annual_production_change_pct": 7.50,
+                    "demand_ten_thousand_vehicles": 140,
+                    "demand_change_pct": -4.76,
+                    "production_cost_ten_thousand_usd": 3.15,
+                    "production_cost_change_pct": 5.00
+                }
+                },
+                "iteration": 0
+            },
             {"type": "iteration_start", "data": {"iteration_text": "迭代 1", "initiator": "china", "content": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}, "iteration": 1},
-            {"type": "agent_responses", "data": {"responses": [{"agent": "us", "score": "75", "action": "实施报复性关税", "action_detail": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}]}, "iteration": 1},
             {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "实施报复性关税", "action_detail": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}]}, "iteration": 1},
-            {"type": "economic_data", "data": {"us": {"GDP": 20.6, "失业率": 5.9, "通胀率": 3.5}, "china": {"GDP": 17.7, "失业率": 5.5, "通胀率": 2.1}}, "iteration": 1},
+            {
+                "type": "economic_data",
+                "data": {
+                "china": {
+                    "import_value_billion_usd": 65.63,
+                    "import_change_pct": -12.50,
+                    "export_value_billion_usd": 314.50,
+                    "export_change_pct": -15.00,
+                    "market_share_pct": 28.98,
+                    "market_share_change_pct": -8.00,
+                    "annual_production_ten_thousand_vehicles": 855,
+                    "annual_production_change_pct": -5.00,
+                    "demand_ten_thousand_vehicles": 723.80,
+                    "demand_change_pct": -6.00,
+                    "production_cost_ten_thousand_usd": 2.37,
+                    "production_cost_change_pct": 3.00
+                },
+                "us": {
+                    "import_value_billion_usd": 102.00,
+                    "import_change_pct": -15.00,
+                    "export_value_billion_usd": 71.50,
+                    "export_change_pct": 10.00,
+                    "market_share_pct": 12.08,
+                    "market_share_change_pct": 15.00,
+                    "annual_production_ten_thousand_vehicles": 236.50,
+                    "annual_production_change_pct": 10.00,
+                    "demand_ten_thousand_vehicles": 147.00,
+                    "demand_change_pct": 5.00,
+                    "production_cost_ten_thousand_usd": 3.21,
+                    "production_cost_change_pct": 2.00
+                }
+                },
+                "iteration": 1
+            },
             {"type": "iteration_start", "data": {"iteration_text": "迭代 2", "initiator": "us", "content": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}, "iteration": 2},
-            {"type": "agent_responses", "data": {"responses": [{"agent": "china", "score": "75", "action": "实施报复性关税", "action_detail": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}]}, "iteration": 2},
             {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}]}, "iteration": 2},
-            {"type": "economic_data", "data": {"us": {"GDP": 20.3, "失业率": 6.2, "通胀率": 3.5}, "china": {"GDP": 17.6, "失业率": 5.8, "通胀率": 2.1}}, "iteration": 2},
+            {
+                "type": "economic_data",
+                "data": {
+                "china": {
+                    "import_value_billion_usd": 60.00,
+                    "import_change_pct": -20.00,
+                    "export_value_billion_usd": 303.40,
+                    "export_change_pct": -18.00,
+                    "market_share_pct": 28.35,
+                    "market_share_change_pct": -10.00,
+                    "annual_production_ten_thousand_vehicles": 846,
+                    "annual_production_change_pct": -6.00,
+                    "demand_ten_thousand_vehicles": 708.40,
+                    "demand_change_pct": -8.00,
+                    "production_cost_ten_thousand_usd": 2.42,
+                    "production_cost_change_pct": 5.00
+                },
+                "us": {
+                    "import_value_billion_usd": 90.00,
+                    "import_change_pct": -25.00,
+                    "export_value_billion_usd": 61.75,
+                    "export_change_pct": -5.00,
+                    "market_share_pct": 11.34,
+                    "market_share_change_pct": 8.00,
+                    "annual_production_ten_thousand_vehicles": 240.80,
+                    "annual_production_change_pct": 12.00,
+                    "demand_ten_thousand_vehicles": 135.80,
+                    "demand_change_pct": -3.00,
+                    "production_cost_ten_thousand_usd": 3.34,
+                    "production_cost_change_pct": 6.00
+                }
+                },
+                "iteration": 2
+            },
             {"type": "iteration_start", "data": {"iteration_text": "迭代 3", "initiator": "china", "content": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}, "iteration": 3},
-            {"type": "agent_responses", "data": {"responses": [{"agent": "us", "score": "75", "action": "发起/响应谈判", "action_detail": "鉴于中国的报复性关税措施对美国农业和关键原材料供应链的影响，美国政府应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分加征关税的可能性，特别是针对农产品和高科技产品；2) 探讨建立更稳定的稀土供应链机制；3) 寻求在技术出口管制方面的相互谅解。此举旨在缓解当前贸易紧张局势，同时保护美国的核心经济利益和技术优势。"}]}, "iteration": 3},
             {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "发起/响应谈判", "action_detail": "鉴于中国的报复性关税措施对美国农业和关键原材料供应链的影响，美国政府应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分加征关税的可能性，特别是针对农产品和高科技产品；2) 探讨建立更稳定的稀土供应链机制；3) 寻求在技术出口管制方面的相互谅解。此举旨在缓解当前贸易紧张局势，同时保护美国的核心经济利益和技术优势。"}]}, "iteration": 3},
-            {"type": "economic_data", "data": {"us": {"GDP": 20.3, "失业率": 6.2, "通胀率": 3.5}, "china": {"GDP": 17.6, "失业率": 5.8, "通胀率": 2.1}}, "iteration": 3},
+            {
+                "type": "economic_data",
+                "data": {
+                "china": {
+                    "import_value_billion_usd": 63.75,
+                    "import_change_pct": -15.00,
+                    "export_value_billion_usd": 325.60,
+                    "export_change_pct": -12.00,
+                    "market_share_pct": 29.61,
+                    "market_share_change_pct": -6.00,
+                    "annual_production_ten_thousand_vehicles": 864,
+                    "annual_production_change_pct": -4.00,
+                    "demand_ten_thousand_vehicles": 746.90,
+                    "demand_change_pct": -3.00,
+                    "production_cost_ten_thousand_usd": 2.25,
+                    "production_cost_change_pct": -2.00
+                },
+                "us": {
+                    "import_value_billion_usd": 108.00,
+                    "import_change_pct": -10.00,
+                    "export_value_billion_usd": 68.25,
+                    "export_change_pct": 5.00,
+                    "market_share_pct": 11.55,
+                    "market_share_change_pct": 10.00,
+                    "annual_production_ten_thousand_vehicles": 232.20,
+                    "annual_production_change_pct": 8.00,
+                    "demand_ten_thousand_vehicles": 142.80,
+                    "demand_change_pct": 2.00,
+                    "production_cost_ten_thousand_usd": 3.12,
+                    "production_cost_change_pct": -1.00
+                }
+                },
+                "iteration": 3
+            },
             {"type": "iteration_end", "data": {"total_iterations": 3, "termination_reason": "达到最大迭代次数"}, "iteration": 3}
         ]
 
