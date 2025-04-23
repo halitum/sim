@@ -266,7 +266,9 @@ async def fake_start():
     async def iterator():
         data_list = [
             {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
-            {"type": "agent_announce", "data": {"score": 85, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
+            {"type": "agent_announce", "data": {"agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
+            {"type": "agent_announce", "data": {"agents": [{"agent": "us_corp", "action": "扩大本土产能", "action_detail": "在关税保护政策推动下，美国车企计划扩大本土生产线，同时加快关键零部件国产化进程，以提高整体供应链稳定性。"}]}, "iteration": 0},
+            {"type": "agent_announce", "data": {"agents": [{"agent": "chine_corp", "action": "寻求多元化出口", "action_detail": "面对美国市场的关税壁垒，中国车企积极开拓‘一带一路’沿线国家市场，寻求多元化出口渠道，同时加快新能源汽车研发以增强国际市场竞争力。"}]}, "iteration": 0},
             {
                 "type": "economic_data",
                 "data": {
@@ -301,116 +303,294 @@ async def fake_start():
                 },
                 "iteration": 0
             },
-            {"type": "iteration_start", "data": {"iteration_text": "迭代 1", "initiator": "china", "content": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}, "iteration": 1},
-            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "实施报复性关税", "action_detail": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}]}, "iteration": 1},
-            {
-                "type": "economic_data",
-                "data": {
-                "china": {
-                    "import_value_billion_usd": 65.63,
-                    "import_change_pct": -12.50,
-                    "export_value_billion_usd": 314.50,
-                    "export_change_pct": -15.00,
-                    "market_share_pct": 28.98,
-                    "market_share_change_pct": -8.00,
-                    "annual_production_ten_thousand_vehicles": 855,
-                    "annual_production_change_pct": -5.00,
-                    "demand_ten_thousand_vehicles": 723.80,
-                    "demand_change_pct": -6.00,
-                    "production_cost_ten_thousand_usd": 2.37,
-                    "production_cost_change_pct": 3.00
+                {
+                    "type": "iteration_start",
+                    "data": {
+                        "iteration_text": "迭代 1",
+                        "initiator": "us",
+                        "content": "美国宣布对中国新能源汽车及其电池零部件加征20%关税，并启动对中国补贴政策的调查，理由是“维护美国产业公平竞争”。"
+                    },
+                    "iteration": 1
                 },
-                "us": {
-                    "import_value_billion_usd": 102.00,
-                    "import_change_pct": -15.00,
-                    "export_value_billion_usd": 71.50,
-                    "export_change_pct": 10.00,
-                    "market_share_pct": 12.08,
-                    "market_share_change_pct": 15.00,
-                    "annual_production_ten_thousand_vehicles": 236.50,
-                    "annual_production_change_pct": 10.00,
-                    "demand_ten_thousand_vehicles": 147.00,
-                    "demand_change_pct": 5.00,
-                    "production_cost_ten_thousand_usd": 3.21,
-                    "production_cost_change_pct": 2.00
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "us",
+                                "action": "加征关税并调查补贴",
+                                "action_detail": "美国贸易代表办公室（USTR）将在90天内完成对中国新能源汽车补贴的全面调查，同时对相关产品征收20%关税，以限制中国新能源汽车在美市场份额。"
+                            }
+                        ]
+                    },
+                    "iteration": 1
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "china",
+                                "action": "对美关键原材料加征关税",
+                                "action_detail": "中国将对美国出口的锂、镍等动力电池关键原材料加征15%的报复性关税，并宣布对美国进口车加征5%附加税。"
+                            }
+                        ]
+                    },
+                    "iteration": 1
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "us_corp",
+                                "action": "寻求供应链多元化",
+                                "action_detail": "主要美国车企与墨西哥和加拿大电池厂商签署长期采购合约，同时评估在东南亚设立零部件工厂的可行性。"
+                            }
+                        ]
+                    },
+                    "iteration": 1
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "chine_corp",
+                                "action": "加速技术升级",
+                                "action_detail": "中国车企宣布增加30%的研发预算，用于固态电池与智能驾驶系统，以提升产品附加值并降低对美出口依赖。"
+                            }
+                        ]
+                    },
+                    "iteration": 1
+                },
+                {
+                    "type": "economic_data",
+                    "data": {
+                        "china": {
+                            "import_value_billion_usd": 65.63,
+                            "import_change_pct": -12.50,
+                            "export_value_billion_usd": 314.50,
+                            "export_change_pct": -15.00,
+                            "market_share_pct": 28.98,
+                            "market_share_change_pct": -8.00,
+                            "annual_production_ten_thousand_vehicles": 855,
+                            "annual_production_change_pct": -5.00,
+                            "demand_ten_thousand_vehicles": 723.80,
+                            "demand_change_pct": -6.00,
+                            "production_cost_ten_thousand_usd": 2.37,
+                            "production_cost_change_pct": 3.00
+                        },
+                        "us": {
+                            "import_value_billion_usd": 102.00,
+                            "import_change_pct": -15.00,
+                            "export_value_billion_usd": 71.50,
+                            "export_change_pct": 10.00,
+                            "market_share_pct": 12.08,
+                            "market_share_change_pct": 15.00,
+                            "annual_production_ten_thousand_vehicles": 236.50,
+                            "annual_production_change_pct": 10.00,
+                            "demand_ten_thousand_vehicles": 147.00,
+                            "demand_change_pct": 5.00,
+                            "production_cost_ten_thousand_usd": 3.21,
+                            "production_cost_change_pct": 2.00
+                        }
+                    },
+                    "iteration": 1
+                },
+
+                {
+                    "type": "iteration_start",
+                    "data": {
+                        "iteration_text": "迭代 2",
+                        "initiator": "us",
+                        "content": "美国财政部公布初步调查结果，指责中国补贴导致市场扭曲，同时暗示若中方让步可放缓关税升级。"
+                    },
+                    "iteration": 2
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "us",
+                                "action": "提出附带条件谈判",
+                                "action_detail": "美国建议与中国开启磋商，条件是中国削减补贴规模30%，否则将对其他输美零部件加征25%关税。"
+                            }
+                        ]
+                    },
+                    "iteration": 2
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "china",
+                                "action": "扩大报复关税范围",
+                                "action_detail": "中国宣布对进口美产大型排量汽车加征10%关税，并启动对美国在华企业享受税收优惠的合规审查。"
+                            }
+                        ]
+                    },
+                    "iteration": 2
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "us_corp",
+                                "action": "加强供应链本土化",
+                                "action_detail": "美国车企决定将关键电子控制单元(ECU)生产迁回本土，并寻求联邦补贴以抵消成本上升。"
+                            }
+                        ]
+                    },
+                    "iteration": 2
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "chine_corp",
+                                "action": "转向东盟与非洲市场",
+                                "action_detail": "中国车企与泰国及南非政府签署组装工厂协议，以绕过美方关税并扩大新兴市场份额。"
+                            }
+                        ]
+                    },
+                    "iteration": 2
+                },
+                {
+                    "type": "economic_data",
+                    "data": {
+                        "china": {
+                            "import_value_billion_usd": 60.00,
+                            "import_change_pct": -20.00,
+                            "export_value_billion_usd": 303.40,
+                            "export_change_pct": -18.00,
+                            "market_share_pct": 28.35,
+                            "market_share_change_pct": -10.00,
+                            "annual_production_ten_thousand_vehicles": 846,
+                            "annual_production_change_pct": -6.00,
+                            "demand_ten_thousand_vehicles": 708.40,
+                            "demand_change_pct": -8.00,
+                            "production_cost_ten_thousand_usd": 2.42,
+                            "production_cost_change_pct": 5.00
+                        },
+                        "us": {
+                            "import_value_billion_usd": 90.00,
+                            "import_change_pct": -25.00,
+                            "export_value_billion_usd": 61.75,
+                            "export_change_pct": -5.00,
+                            "market_share_pct": 11.34,
+                            "market_share_change_pct": 8.00,
+                            "annual_production_ten_thousand_vehicles": 240.80,
+                            "annual_production_change_pct": 12.00,
+                            "demand_ten_thousand_vehicles": 135.80,
+                            "demand_change_pct": -3.00,
+                            "production_cost_ten_thousand_usd": 3.34,
+                            "production_cost_change_pct": 6.00
+                        }
+                    },
+                    "iteration": 2
+                },
+
+                {
+                    "type": "iteration_start",
+                    "data": {
+                        "iteration_text": "迭代 3",
+                        "initiator": "us",
+                        "content": "在多方压力下，美国宣布暂缓对新增零部件关税，提出建立中美新能源汽车补贴透明机制的框架协议草案。"
+                    },
+                    "iteration": 3
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "us",
+                                "action": "暂缓部分关税并提议补贴透明框架",
+                                "action_detail": "美国将延后原定于60天后生效的额外25%关税，并邀请中国在WTO框架下共同制定新能源汽车补贴披露规则。"
+                            }
+                        ]
+                    },
+                    "iteration": 3
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "china",
+                                "action": "同意谈判并降低部分关税",
+                                "action_detail": "中国同意参与补贴透明机制谈判，并宣布对部分美国农产品关税减让2%，作为善意回应。"
+                            }
+                        ]
+                    },
+                    "iteration": 3
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "us_corp",
+                                "action": "扩大对欧盟出口计划",
+                                "action_detail": "预期关税缓和后，美国车企将利用产能过剩向欧盟市场出口高端电动车，以分散对中国零部件依赖。"
+                            }
+                        ]
+                    },
+                    "iteration": 3
+                },
+                {
+                    "type": "agent_announce",
+                    "data": {
+                        "agents": [
+                            {
+                                "agent": "chine_corp",
+                                "action": "提升绿色制造能力",
+                                "action_detail": "中国车企宣布全面升级生产线以降低碳排放，并计划在欧洲建立电池回收网络，提升品牌形象。"
+                            }
+                        ]
+                    },
+                    "iteration": 3
+                },
+                {
+                    "type": "economic_data",
+                    "data": {
+                        "china": {
+                            "import_value_billion_usd": 63.75,
+                            "import_change_pct": -15.00,
+                            "export_value_billion_usd": 325.60,
+                            "export_change_pct": -12.00,
+                            "market_share_pct": 29.61,
+                            "market_share_change_pct": -6.00,
+                            "annual_production_ten_thousand_vehicles": 864,
+                            "annual_production_change_pct": -4.00,
+                            "demand_ten_thousand_vehicles": 746.90,
+                            "demand_change_pct": -3.00,
+                            "production_cost_ten_thousand_usd": 2.25,
+                            "production_cost_change_pct": -2.00
+                        },
+                        "us": {
+                            "import_value_billion_usd": 108.00,
+                            "import_change_pct": -10.00,
+                            "export_value_billion_usd": 68.25,
+                            "export_change_pct": 5.00,
+                            "market_share_pct": 11.55,
+                            "market_share_change_pct": 10.00,
+                            "annual_production_ten_thousand_vehicles": 232.20,
+                            "annual_production_change_pct": 8.00,
+                            "demand_ten_thousand_vehicles": 142.80,
+                            "demand_change_pct": 2.00,
+                            "production_cost_ten_thousand_usd": 3.12,
+                            "production_cost_change_pct": -1.00
+                        }
+                    },
+                    "iteration": 3
                 }
-                },
-                "iteration": 1
-            },
-            {"type": "iteration_start", "data": {"iteration_text": "迭代 2", "initiator": "us", "content": "针对中国对农产品和稀土的关税措施，美国将对中国的电子产品和机械设备加征15%的关税，同时限制对中国的高科技产品出口，以保护国内技术优势和制造业回流政策。"}, "iteration": 2},
-            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}]}, "iteration": 2},
-            {
-                "type": "economic_data",
-                "data": {
-                "china": {
-                    "import_value_billion_usd": 60.00,
-                    "import_change_pct": -20.00,
-                    "export_value_billion_usd": 303.40,
-                    "export_change_pct": -18.00,
-                    "market_share_pct": 28.35,
-                    "market_share_change_pct": -10.00,
-                    "annual_production_ten_thousand_vehicles": 846,
-                    "annual_production_change_pct": -6.00,
-                    "demand_ten_thousand_vehicles": 708.40,
-                    "demand_change_pct": -8.00,
-                    "production_cost_ten_thousand_usd": 2.42,
-                    "production_cost_change_pct": 5.00
-                },
-                "us": {
-                    "import_value_billion_usd": 90.00,
-                    "import_change_pct": -25.00,
-                    "export_value_billion_usd": 61.75,
-                    "export_change_pct": -5.00,
-                    "market_share_pct": 11.34,
-                    "market_share_change_pct": 8.00,
-                    "annual_production_ten_thousand_vehicles": 240.80,
-                    "annual_production_change_pct": 12.00,
-                    "demand_ten_thousand_vehicles": 135.80,
-                    "demand_change_pct": -3.00,
-                    "production_cost_ten_thousand_usd": 3.34,
-                    "production_cost_change_pct": 6.00
-                }
-                },
-                "iteration": 2
-            },
-            {"type": "iteration_start", "data": {"iteration_text": "迭代 3", "initiator": "china", "content": "针对美国对中国的电子产品和机械设备加征15%的关税以及高科技产品出口限制，中国将对美国的农产品（如大豆、玉米）和关键原材料（如稀土）加征20%的关税，同时限制对美国出口的稀土和其他关键矿产。此举旨在保护国内产业链安全，同时利用中国在稀土供应链中的优势地位进行非对称反击。"}, "iteration": 3},
-            {"type": "agent_announce", "data": {"score": 75, "agents": [{"agent": "us", "action": "发起/响应谈判", "action_detail": "鉴于中国的报复性关税措施对美国农业和关键原材料供应链的影响，美国政府应主动提议与中国进行双边贸易谈判。谈判重点应包括：1) 讨论降低或取消部分加征关税的可能性，特别是针对农产品和高科技产品；2) 探讨建立更稳定的稀土供应链机制；3) 寻求在技术出口管制方面的相互谅解。此举旨在缓解当前贸易紧张局势，同时保护美国的核心经济利益和技术优势。"}]}, "iteration": 3},
-            {
-                "type": "economic_data",
-                "data": {
-                "china": {
-                    "import_value_billion_usd": 63.75,
-                    "import_change_pct": -15.00,
-                    "export_value_billion_usd": 325.60,
-                    "export_change_pct": -12.00,
-                    "market_share_pct": 29.61,
-                    "market_share_change_pct": -6.00,
-                    "annual_production_ten_thousand_vehicles": 864,
-                    "annual_production_change_pct": -4.00,
-                    "demand_ten_thousand_vehicles": 746.90,
-                    "demand_change_pct": -3.00,
-                    "production_cost_ten_thousand_usd": 2.25,
-                    "production_cost_change_pct": -2.00
-                },
-                "us": {
-                    "import_value_billion_usd": 108.00,
-                    "import_change_pct": -10.00,
-                    "export_value_billion_usd": 68.25,
-                    "export_change_pct": 5.00,
-                    "market_share_pct": 11.55,
-                    "market_share_change_pct": 10.00,
-                    "annual_production_ten_thousand_vehicles": 232.20,
-                    "annual_production_change_pct": 8.00,
-                    "demand_ten_thousand_vehicles": 142.80,
-                    "demand_change_pct": 2.00,
-                    "production_cost_ten_thousand_usd": 3.12,
-                    "production_cost_change_pct": -1.00
-                }
-                },
-                "iteration": 3
-            },
-            {"type": "iteration_end", "data": {"total_iterations": 3, "termination_reason": "达到最大迭代次数"}, "iteration": 3}
-        ]
+            ]
 
         for data in data_list:
             yield f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
