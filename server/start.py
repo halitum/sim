@@ -11,6 +11,8 @@ from fastapi.responses import StreamingResponse
 
 context_agent = ContextAgent(initial_context=context, model_name="deepseek-v3")
 
+iteration = 1
+
 # 参与模拟的agent列表
 agents = {
     "us": USAgent("deepseek-v3"),
@@ -264,7 +266,7 @@ async def start() -> StreamingResponse:
 
 async def fake_start():
     async def iterator():
-        data_list = [
+        data_list1 = [
             {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
             {"type": "agent_announce", "data": {"agents": [{"agent": "china", "action": "实施报复性关税", "action_detail": "针对美国加征关税的行为，中国将采取非对称打击策略，重点对美国农产品（如大豆、玉米）和关键工业原材料（如稀土）加征报复性关税。同时，中国将利用其在稀土等关键原材料上的优势地位，限制对美国的出口，以保护国内产业链安全和推动人民币国际化。此举旨在向美国施压，促使其重新考虑贸易政策，并在谈判中争取更有利的条件。"}]}, "iteration": 0},
             {"type": "agent_announce", "data": {"agents": [{"agent": "us_corp", "action": "扩大本土产能", "action_detail": "在关税保护政策推动下，美国车企计划扩大本土生产线，同时加快关键零部件国产化进程，以提高整体供应链稳定性。"}]}, "iteration": 0},
@@ -592,9 +594,655 @@ async def fake_start():
                 }
             ]
 
+        data_list2 = [
+            {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "china",
+                            "action": "宣布对美部分商品加征反制关税",
+                            "action_detail": "中国财政部宣布对美国出口至中国的航空零部件、猪肉、葡萄酒等商品加征5%-15%的报复性关税，同时表示保留进一步扩大关税范围的权利。此举旨在对等回应美方贸易施压，并维护多边贸易秩序。"
+                        }
+                    ]
+                },
+                "iteration": 0
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "寻求非中国供应商",
+                            "action_detail": "面对中方反制关税，美国汽车制造商和航空零部件企业开始重新评估其在中国的供应链布局，考虑转向越南、墨西哥等地采购以分散风险。"
+                        }
+                    ]
+                },
+                "iteration": 0
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "加强内循环与海外市场开拓",
+                            "action_detail": "中国汽车与机电企业启动“内外双轮”策略，提升国内市场占比，同时加强与东盟、拉美地区的出口合作，规避美国市场壁垒。"
+                        }
+                    ]
+                },
+                "iteration": 0
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 74.20,
+                        "import_change_pct": -6.40,
+                        "export_value_billion_usd": 368.00,
+                        "export_change_pct": -10.80,
+                        "market_share_pct": 31.10,
+                        "market_share_change_pct": -5.00,
+                        "annual_production_ten_thousand_vehicles": 890,
+                        "annual_production_change_pct": -2.50,
+                        "demand_ten_thousand_vehicles": 768.00,
+                        "demand_change_pct": -5.00,
+                        "production_cost_ten_thousand_usd": 2.35,
+                        "production_cost_change_pct": -3.00
+                    },
+                    "us": {
+                        "import_value_billion_usd": 121.50,
+                        "import_change_pct": -9.80,
+                        "export_value_billion_usd": 66.20,
+                        "export_change_pct": 7.60,
+                        "market_share_pct": 10.70,
+                        "market_share_change_pct": 11.80,
+                        "annual_production_ten_thousand_vehicles": 218.00,
+                        "annual_production_change_pct": 6.80,
+                        "demand_ten_thousand_vehicles": 141.20,
+                        "demand_change_pct": -4.50,
+                        "production_cost_ten_thousand_usd": 3.18,
+                        "production_cost_change_pct": 4.50
+                    }
+                },
+                "iteration": 0
+            },
+            {
+                "type": "iteration_start",
+                "data": {
+                    "iteration_text": "迭代 1",
+                    "initiator": "us",
+                    "content": "美国进一步宣布，对中国出口至美国的电动汽车电池组及充电模块加征25%关税，理由是“保障新能源产业核心安全”并限制对中国的战略依赖。"
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us",
+                            "action": "扩大关税至新能源汽车核心部件",
+                            "action_detail": "美国贸易代表办公室表示，新增的25%关税将适用于中国出口的锂电池模组、整车电控系统与智能充电设备，目的是减少关键能源设备依赖。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "china",
+                            "action": "对美高附加值产品加征报复关税",
+                            "action_detail": "中国将对进口自美国的中大型SUV整车和发动机总成征收10%-20%的附加税，并对涉及新能源设备的关键技术设备启动安全审查。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "加快墨西哥电池厂投产计划",
+                            "action_detail": "为降低对华进口依赖，通用与LG能源合资电池厂在墨西哥的投产时程将提前半年，专供北美电动车产线。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "加速开拓南美与中东市场",
+                            "action_detail": "比亚迪与巴西、沙特合作建立装配工厂，作为替代出口战略的关键节点，并同步布局售后服务网络。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 67.50,
+                        "import_change_pct": -8.80,
+                        "export_value_billion_usd": 345.00,
+                        "export_change_pct": -6.25,
+                        "market_share_pct": 29.80,
+                        "market_share_change_pct": -4.20,
+                        "annual_production_ten_thousand_vehicles": 872,
+                        "annual_production_change_pct": -2.02,
+                        "demand_ten_thousand_vehicles": 745.00,
+                        "demand_change_pct": -3.00,
+                        "production_cost_ten_thousand_usd": 2.38,
+                        "production_cost_change_pct": 1.28
+                    },
+                    "us": {
+                        "import_value_billion_usd": 112.80,
+                        "import_change_pct": -7.20,
+                        "export_value_billion_usd": 69.80,
+                        "export_change_pct": 5.43,
+                        "market_share_pct": 11.30,
+                        "market_share_change_pct": 5.61,
+                        "annual_production_ten_thousand_vehicles": 226.50,
+                        "annual_production_change_pct": 3.87,
+                        "demand_ten_thousand_vehicles": 143.00,
+                        "demand_change_pct": 1.27,
+                        "production_cost_ten_thousand_usd": 3.22,
+                        "production_cost_change_pct": 1.26
+                    }
+                },
+                "iteration": 1
+            },
+            {
+                "type": "iteration_start",
+                "data": {
+                    "iteration_text": "迭代 2",
+                    "initiator": "china",
+                    "content": "中国商务部发布声明，呼吁中美恢复高层经贸对话，并表示如美方释放善意，中方将考虑在关税与投资审查方面适度调整。"
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "china",
+                            "action": "呼吁重启对话并释放谈判信号",
+                            "action_detail": "中国商务部提出建立“中美绿色产业工作组”建议，并宣布暂停对部分美系车企技术设备进口的安全审查程序，释放缓和信号。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us",
+                            "action": "回应谨慎，并强调结构性改革诉求",
+                            "action_detail": "美国财政部表示愿就新能源汽车补贴与市场准入进行接触性对话，但强调中方需在知识产权与补贴透明度上作出“实质性承诺”。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "呼吁政府明确长期政策方向",
+                            "action_detail": "美国产业联盟联合声明，支持中美开展绿色产业对话，认为建立清晰、可预期的出口监管机制将有助于企业制定中长期投资决策。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "对接国际标准以缓解贸易摩擦",
+                            "action_detail": "宁德时代宣布将核心动力电池产品全面对标欧盟REACH与美方UL标准，助力产品“认证出海”，并提升全球供应链可信度。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 68.40,
+                        "import_change_pct": 1.33,
+                        "export_value_billion_usd": 347.80,
+                        "export_change_pct": 0.81,
+                        "market_share_pct": 30.10,
+                        "market_share_change_pct": 1.00,
+                        "annual_production_ten_thousand_vehicles": 878,
+                        "annual_production_change_pct": 0.69,
+                        "demand_ten_thousand_vehicles": 752.50,
+                        "demand_change_pct": 1.01,
+                        "production_cost_ten_thousand_usd": 2.30,
+                        "production_cost_change_pct": -3.36
+                    },
+                    "us": {
+                        "import_value_billion_usd": 115.00,
+                        "import_change_pct": 1.95,
+                        "export_value_billion_usd": 70.90,
+                        "export_change_pct": 1.58,
+                        "market_share_pct": 11.50,
+                        "market_share_change_pct": 1.77,
+                        "annual_production_ten_thousand_vehicles": 229.20,
+                        "annual_production_change_pct": 1.19,
+                        "demand_ten_thousand_vehicles": 144.00,
+                        "demand_change_pct": 0.70,
+                        "production_cost_ten_thousand_usd": 3.16,
+                        "production_cost_change_pct": -1.86
+                    }
+                },
+                "iteration": 2
+            },
+            {
+                "type": "iteration_start",
+                "data": {
+                    "iteration_text": "迭代 3",
+                    "initiator": "us",
+                    "content": "美国贸易代表办公室公布与中国就新能源汽车领域的谈判进展，并宣布暂停部分新增关税，同时设立“中美绿色科技联合评估组”。"
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us",
+                            "action": "暂停关税并启动评估机制",
+                            "action_detail": "美国决定暂缓对新增电控设备与高功率充电器的25%关税实施，并将与中国设立联合评估组，定期交流绿色科技补贴、市场准入等议题。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "china",
+                            "action": "降低对美关键零部件关税",
+                            "action_detail": "中国财政部宣布自下季度起，部分美国产新能源汽车零部件关税税率从15%下调至10%，以回应美方释放的谈判诚意。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "重启对华合作项目评估",
+                            "action_detail": "美国部分新能源汽车企业开始重启中止中的技术授权与合资谈判，主要聚焦电池技术、智能驾驶系统等低敏感度领域。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "推进海外IPO与战略合作",
+                            "action_detail": "小鹏汽车与理想汽车宣布计划赴港二次上市，融资资金将主要用于欧洲产能扩张及与当地运营商的战略联盟。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 70.10,
+                        "import_change_pct": 2.49,
+                        "export_value_billion_usd": 353.80,
+                        "export_change_pct": 1.72,
+                        "market_share_pct": 30.90,
+                        "market_share_change_pct": 2.66,
+                        "annual_production_ten_thousand_vehicles": 886,
+                        "annual_production_change_pct": 0.91,
+                        "demand_ten_thousand_vehicles": 760.00,
+                        "demand_change_pct": 1.00,
+                        "production_cost_ten_thousand_usd": 2.27,
+                        "production_cost_change_pct": -1.30
+                    },
+                    "us": {
+                        "import_value_billion_usd": 117.80,
+                        "import_change_pct": 2.43,
+                        "export_value_billion_usd": 72.40,
+                        "export_change_pct": 2.11,
+                        "market_share_pct": 11.85,
+                        "market_share_change_pct": 3.04,
+                        "annual_production_ten_thousand_vehicles": 232.80,
+                        "annual_production_change_pct": 1.57,
+                        "demand_ten_thousand_vehicles": 146.20,
+                        "demand_change_pct": 1.53,
+                        "production_cost_ten_thousand_usd": 3.08,
+                        "production_cost_change_pct": -2.53
+                    }
+                },
+                "iteration": 3
+            }
+        ]
+
+        data_list3 = [
+            {"type": "iteration_start", "data": {"iteration_text": "初始响应", "initiator": "us", "content": "美国总统特朗普签署行政令，宣布：对所有贸易伙伴加征10%的关税。对与美国贸易逆差最大的国家和地区征收更高的\"对等关税\""}, "iteration": 0},
+            {
+                "type": "iteration_start",
+                "data": {
+                    "iteration_text": "迭代 1",
+                    "initiator": "china",
+                    "content": "中国宣布对包括大豆、飞机零部件、半导体设备在内的500亿美元美国商品加征最高10%关税，并中止对部分美企的采购合作。"
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us",
+                            "action": "扩大征税面并审查中国在美资产",
+                            "action_detail": "白宫宣布对中国电子产品、新能源设备等追加25%关税，并授权财政部全面审查中国国企及投资基金在美投资项目与资产配置。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "加速撤离中国",
+                            "action_detail": "多家在华美企（包括苹果代工厂、特斯拉配套商）启动“去中国化”计划，拟将产线转向印度、东南亚以规避政策风险。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "配合国家战略构建“内循环”体系",
+                            "action_detail": "华为、比亚迪等企业宣布实施“双自主”战略，在全国建立备份供应链体系并优先服务国内市场，以保障自主安全。"
+                        }
+                    ]
+                },
+                "iteration": 1
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 62.00,
+                        "import_change_pct": -17.30,
+                        "export_value_billion_usd": 320.00,
+                        "export_change_pct": -13.50,
+                        "market_share_pct": 28.00,
+                        "market_share_change_pct": -7.00,
+                        "annual_production_ten_thousand_vehicles": 845,
+                        "annual_production_change_pct": -6.10,
+                        "demand_ten_thousand_vehicles": 702.00,
+                        "demand_change_pct": -7.30,
+                        "production_cost_ten_thousand_usd": 2.45,
+                        "production_cost_change_pct": 3.50
+                    },
+                    "us": {
+                        "import_value_billion_usd": 92.00,
+                        "import_change_pct": -23.30,
+                        "export_value_billion_usd": 60.00,
+                        "export_change_pct": -7.70,
+                        "market_share_pct": 10.20,
+                        "market_share_change_pct": -4.80,
+                        "annual_production_ten_thousand_vehicles": 210.00,
+                        "annual_production_change_pct": -5.00,
+                        "demand_ten_thousand_vehicles": 135.00,
+                        "demand_change_pct": -3.60,
+                        "production_cost_ten_thousand_usd": 3.38,
+                        "production_cost_change_pct": 6.80
+                    }
+                },
+                "iteration": 1
+            },
+            {
+                "type": "iteration_start",
+                "data": {
+                    "iteration_text": "迭代 2",
+                    "initiator": "us",
+                    "content": "美国联合欧盟、日本、加拿大发表联合声明，宣布建立‘民主技术联盟’，共同限制对华高端芯片、自动驾驶、量子计算产品出口，并冻结部分中资企业在西方国家的银行账户。"
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us",
+                            "action": "联合盟友组建‘民主技术联盟’",
+                            "action_detail": "美、欧、日、加共同实施对华出口禁令，涵盖先进芯片、车载操作系统、工业仿真软件，并同步冻结华为、中兴、比亚迪在欧美的银行账户，限制其跨境资金流动。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "china",
+                            "action": "推动数字人民币国际化与支付脱钩",
+                            "action_detail": "中国人民银行宣布与多国央行开展数字人民币跨境结算试点，推动与东盟、非洲、俄罗斯等国家建立独立于SWIFT体系的清算网络。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "遭遇中国市场舆论与政策封锁",
+                            "action_detail": "苹果、波音、耐克等美国品牌在中国遭遇消费者大规模抵制，多地政府采购排除美企产品，营收锐减超40%，资本市场信心动摇。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "推动人民币结算系统走向拉美与非洲",
+                            "action_detail": "中国出口型龙头企业与巴西、南非、阿联酋等国签署以人民币计价的大宗贸易协议，并推动在当地建设人民币清算中心。"
+                        }
+                    ]
+                },
+                "iteration": 2
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 58.00,
+                        "import_change_pct": -25.80,
+                        "export_value_billion_usd": 298.50,
+                        "export_change_pct": -21.70,
+                        "market_share_pct": 25.80,
+                        "market_share_change_pct": -8.00,
+                        "annual_production_ten_thousand_vehicles": 810,
+                        "annual_production_change_pct": -8.20,
+                        "demand_ten_thousand_vehicles": 690.00,
+                        "demand_change_pct": -9.70,
+                        "production_cost_ten_thousand_usd": 2.60,
+                        "production_cost_change_pct": 6.40
+                    },
+                    "us": {
+                        "import_value_billion_usd": 85.00,
+                        "import_change_pct": -30.00,
+                        "export_value_billion_usd": 56.20,
+                        "export_change_pct": -9.10,
+                        "market_share_pct": 9.80,
+                        "market_share_change_pct": -6.40,
+                        "annual_production_ten_thousand_vehicles": 205.00,
+                        "annual_production_change_pct": -6.20,
+                        "demand_ten_thousand_vehicles": 132.50,
+                        "demand_change_pct": -5.00,
+                        "production_cost_ten_thousand_usd": 3.52,
+                        "production_cost_change_pct": 8.20
+                    }
+                },
+                "iteration": 2
+            },
+            {
+                "type": "iteration_start",
+                "data": {
+                    "iteration_text": "迭代 3",
+                    "initiator": "china",
+                    "content": "中国宣布将重要信息基础设施全面迁出美系技术体系，实施‘网络安全白名单’制度，逐步推进数字生态去美元化。"
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "china",
+                            "action": "建立‘信息安全白名单’，加速网络脱钩",
+                            "action_detail": "中国国家网信办发布新规，所有政企核心系统必须使用国产芯片、操作系统与数据库，全面停用美系云服务与安全协议接口，并限制对美元支付接口的依赖。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us",
+                            "action": "冻结中资企业美元结算通道",
+                            "action_detail": "美国财政部发布紧急指令，暂停所有涉及特定中资科技与汽车企业的美元跨境结算服务，并对五家大型中资银行进行审计追责。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "us_corp",
+                            "action": "被排除于中国网络与支付系统之外",
+                            "action_detail": "谷歌、亚马逊AWS、英伟达等被中国列入信息安全限制清单，原有合作终止，云服务与AI芯片业务全面冻结，资本市场预期大跌。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "agent_announce",
+                "data": {
+                    "agents": [
+                        {
+                            "agent": "chine_corp",
+                            "action": "加速构建人民币计价、国密通信的企业闭环",
+                            "action_detail": "中国头部科技与车企全面部署国产操作系统与‘国密算法’通信标准，建立境内闭环ERP与供应链金融体系，实现关键业务对美脱钩。"
+                        }
+                    ]
+                },
+                "iteration": 3
+            },
+            {
+                "type": "economic_data",
+                "data": {
+                    "china": {
+                        "import_value_billion_usd": 52.80,
+                        "import_change_pct": -31.03,
+                        "export_value_billion_usd": 281.00,
+                        "export_change_pct": -29.00,
+                        "market_share_pct": 24.50,
+                        "market_share_change_pct": -5.00,
+                        "annual_production_ten_thousand_vehicles": 788,
+                        "annual_production_change_pct": -6.80,
+                        "demand_ten_thousand_vehicles": 676.00,
+                        "demand_change_pct": -4.90,
+                        "production_cost_ten_thousand_usd": 2.72,
+                        "production_cost_change_pct": 4.62
+                    },
+                    "us": {
+                        "import_value_billion_usd": 80.00,
+                        "import_change_pct": -28.57,
+                        "export_value_billion_usd": 52.00,
+                        "export_change_pct": -7.45,
+                        "market_share_pct": 9.30,
+                        "market_share_change_pct": -5.10,
+                        "annual_production_ten_thousand_vehicles": 198.00,
+                        "annual_production_change_pct": -3.40,
+                        "demand_ten_thousand_vehicles": 129.00,
+                        "demand_change_pct": -2.60,
+                        "production_cost_ten_thousand_usd": 3.61,
+                        "production_cost_change_pct": 2.56
+                    }
+                },
+                "iteration": 3
+            }
+        ]
+
+        global iteration
+
+        data_list = data_list1 if iteration == 1 else data_list2 if iteration == 2 else data_list3
+
         for data in data_list:
             yield f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
-            await asyncio.sleep(2)
+            await asyncio.sleep(5)
+
+        iteration += 1
+        if iteration > 3:
+            iteration = 1
 
     return StreamingResponse(
         iterator(),
